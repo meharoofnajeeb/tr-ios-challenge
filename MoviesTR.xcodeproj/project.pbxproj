@@ -6,17 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */; };
+		5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */; };
+		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5F265FFF2E62719F00D7861F /* MoviesTR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesTR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRApp.swift; sourceTree = "<group>"; };
+		5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		5F2660012E62719F00D7861F /* MoviesTR */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MoviesTR;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5F265FFC2E62719F00D7861F /* Frameworks */ = {
@@ -32,7 +33,7 @@
 		5F265FF62E62719F00D7861F = {
 			isa = PBXGroup;
 			children = (
-				5F2660012E62719F00D7861F /* MoviesTR */,
+				5F92FF1D2E62E43C00A917E5 /* MoviesTR */,
 				5F2660002E62719F00D7861F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +44,96 @@
 				5F265FFF2E62719F00D7861F /* MoviesTR.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5F92FF122E62E43C00A917E5 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5F92FF132E62E43C00A917E5 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		5F92FF142E62E43C00A917E5 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		5F92FF162E62E43C00A917E5 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF132E62E43C00A917E5 /* Entities */,
+				5F92FF142E62E43C00A917E5 /* Repositories */,
+				5F92FF242E62FA9B00A917E5 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		5F92FF1A2E62E43C00A917E5 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF232E62E59E00A917E5 /* MoviesList */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		5F92FF1D2E62E43C00A917E5 /* MoviesTR */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */,
+				5F92FF122E62E43C00A917E5 /* Application */,
+				5F92FF252E62FAAE00A917E5 /* Data */,
+				5F92FF162E62E43C00A917E5 /* Domain */,
+				5F92FF1A2E62E43C00A917E5 /* Presentation */,
+			);
+			path = MoviesTR;
+			sourceTree = "<group>";
+		};
+		5F92FF232E62E59E00A917E5 /* MoviesList */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */,
+			);
+			path = MoviesList;
+			sourceTree = "<group>";
+		};
+		5F92FF242E62FA9B00A917E5 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		5F92FF252E62FAAE00A917E5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF262E62FAB700A917E5 /* Network */,
+				5F92FF272E62FACE00A917E5 /* Persistence */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5F92FF262E62FAB700A917E5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		5F92FF272E62FACE00A917E5 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +150,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				5F2660012E62719F00D7861F /* MoviesTR */,
 			);
 			name = MoviesTR;
 			packageProductDependencies = (
@@ -109,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +208,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */,
+				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

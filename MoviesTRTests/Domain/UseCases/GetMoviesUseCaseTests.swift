@@ -57,7 +57,7 @@ final class GetMoviesUseCaseTests: XCTestCase {
             self.error = errorToThrow
         }
         
-        func fetchAllMovies() async throws -> [MoviesTR.Movie] {
+        func fetchMovies(type: MoviesType) async throws -> [MoviesTR.Movie] {
             fetchAllCallCount += 1
             if let error {
                 throw error

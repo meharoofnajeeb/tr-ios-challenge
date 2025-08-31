@@ -12,7 +12,7 @@ final class GetMoviesUseCase {
         self.fetcher = fetcher
     }
     
-    func getMovies() async throws -> [Movie] {
-        return try await fetcher.fetchAllMovies()
+    func getMovies(type: MoviesType = .all) async throws -> [Movie] {
+        return try await fetcher.fetchMovies(type: type)
     }
 }

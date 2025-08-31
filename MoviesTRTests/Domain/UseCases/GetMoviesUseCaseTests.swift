@@ -32,15 +32,33 @@ final class GetMoviesUseCaseTests: XCTestCase {
         XCTAssertEqual(movies, [expectedMovie])
     }
     
+    func test_getMovies_deliversErrorOnFetcherError() async {
+        let expectedError = NSError(domain: "test", code: -1)
+        let fetcher = MoviesFetcherSpy(errorToThrow: expectedError)
+        let sut = GetMoviesUseCase(fetcher: fetcher)
+        
+        do {
+            let _ = try await sut.getMovies()
+            XCTFail("Expected error. Got success instead.")
+        } catch {
+            XCTAssertEqual(error as NSError, expectedError)
+        }
+    }
+    
     // MARK: - Private helpers
     private class MoviesFetcherSpy: MoviesFetching {
         private let moviesToReturn: [Movie]
+        private var error: Error?
         
-        init(moviesToReturn: [Movie]) {
+        init(moviesToReturn: [Movie] = [], errorToThrow: Error? = nil) {
             self.moviesToReturn = moviesToReturn
+            self.error = errorToThrow
         }
         
         func fetchAllMovies() async throws -> [MoviesTR.Movie] {
+            if let error {
+                throw error
+            }
             return moviesToReturn
         }
     }

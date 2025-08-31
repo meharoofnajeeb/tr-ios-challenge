@@ -22,7 +22,7 @@ final class GetMovieDetailUseCase {
 
 final class GetMovieDetailUseCaseTests: XCTestCase {
     func test_init_doesNotMessageFetcher() {
-        let fetcher = MovieDetailFetcherSpy(movieToReturn: MovieDetail(id: 1, name: "Movie 1", description: "Description1", notes: "Notes 1", rating: "10", imageURL: URL(string: "http://any-url.com")!, releaseDate: "2000"))
+        let fetcher = MovieDetailFetcherSpy(movieToReturn: anyMovieDetail())
         let _ = GetMovieDetailUseCase(fetcher: fetcher)
         
         XCTAssertEqual(fetcher.fetchMovieDetailsCallCount, 0)
@@ -30,7 +30,7 @@ final class GetMovieDetailUseCaseTests: XCTestCase {
     
     func test_getMovieDetails_deliversMovieDetailsOnFetcherSuccess() async throws {
         let movieID = 1
-        let expectedMovieDetail = MovieDetail(id: movieID, name: "Movie 1", description: "Description1", notes: "Notes 1", rating: "10", imageURL: URL(string: "http://any-url.com")!, releaseDate: "2000")
+        let expectedMovieDetail = anyMovieDetail(movieID: movieID)
         let fetcher = MovieDetailFetcherSpy(movieToReturn: expectedMovieDetail)
         let sut = GetMovieDetailUseCase(fetcher: fetcher)
         
@@ -57,6 +57,10 @@ final class GetMovieDetailUseCaseTests: XCTestCase {
         let fetcher = MovieDetailFetcherSpy(movieToReturn: exptectedMovie, expectedError: expectedError)
         let sut = GetMovieDetailUseCase(fetcher: fetcher)
         return (sut, fetcher)
+    }
+    
+    private func anyMovieDetail(movieID: Int = 1) -> MovieDetail {
+        return MovieDetail(id: movieID, name: "Movie 1", description: "Description1", notes: "Notes 1", rating: "10", imageURL: URL(string: "http://any-url.com")!, releaseDate: "2000")
     }
     
     private class MovieDetailFetcherSpy: MovieDetailFetching {

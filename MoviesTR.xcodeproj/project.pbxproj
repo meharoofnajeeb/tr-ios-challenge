@@ -10,6 +10,7 @@
 		5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */; };
 		5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */; };
 		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
+		5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF2A2E63D73300A917E5 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRApp.swift; sourceTree = "<group>"; };
 		5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
+		5F92FF2A2E63D73300A917E5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		5F92FF132E62E43C00A917E5 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				5F92FF2A2E63D73300A917E5 /* Movie.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			files = (
 				5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,
+				5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

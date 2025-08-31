@@ -17,6 +17,7 @@
 		5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */; };
 		5F92FF512E63FDE700A917E5 /* MovieDetailFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */; };
 		5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */; };
+		5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailFetching.swift; sourceTree = "<group>"; };
 		5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailUseCaseTests.swift; sourceTree = "<group>"; };
+		5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailsUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				5F92FF462E63FCB800A917E5 /* GetMoviesUseCase.swift */,
+				5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				5F92FF512E63FDE700A917E5 /* MovieDetailFetching.swift in Sources */,
 				5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,
+				5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */,
 				5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

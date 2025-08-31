@@ -8,18 +8,6 @@
 import XCTest
 @testable import MoviesTR
 
-final class GetMovieDetailUseCase {
-    private let fetcher: MovieDetailFetching
-    
-    init(fetcher: MovieDetailFetching) {
-        self.fetcher = fetcher
-    }
-    
-    func getMovieDetails(for id: Int) async throws -> MovieDetail {
-        return try await fetcher.fetchMovieDetails(for: id)
-    }
-}
-
 final class GetMovieDetailUseCaseTests: XCTestCase {
     func test_init_doesNotMessageFetcher() {
         let fetcher = MovieDetailFetcherSpy(movieToReturn: anyMovieDetail())

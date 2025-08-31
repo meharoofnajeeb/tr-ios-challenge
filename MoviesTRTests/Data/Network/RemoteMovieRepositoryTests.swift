@@ -47,7 +47,7 @@ final class RemoteMovieRepository: MoviesFetching {
 
 final class RemoteMovieRepositoryTests: XCTestCase {
 
-    func test_fetchMovies_forAllMovies_constructsURLCorrectlyForAllMoviesAnddeliversResponseSuccessfully() async throws {
+    func test_fetchMovies_forAllMovies_constructsURLCorrectlyForAllMovies() async throws {
         let json = makeJsonMovieData()
         let sut = makeSUT()
         URLProtocolStub.requestHandler = { [weak self] request in
@@ -59,13 +59,7 @@ final class RemoteMovieRepositoryTests: XCTestCase {
             return (json, response)
         }
         
-        let movies = try await sut.fetchMovies(type: .all)
-        
-        XCTAssertEqual(movies.count, 1)
-        XCTAssertEqual(movies.first?.id, 1)
-        XCTAssertEqual(movies.first?.name, "Movie 1")
-        XCTAssertEqual(movies.first?.imageURL, URL(string: "https://image-urls.com/1.jpg"))
-        XCTAssertEqual(movies.first?.year, "2000")
+        _ = try await sut.fetchMovies(type: .all)
     }
     
     func test_fetchMovies_forRecommendedMovies_constructsAppropriateURLForRecommendedMovies() async throws {
@@ -85,9 +79,26 @@ final class RemoteMovieRepositoryTests: XCTestCase {
             return (json, response)
         }
         
-        let movies = try await sut.fetchMovies(type: .recommended(movieID))
+        _ = try await sut.fetchMovies(type: .recommended(movieID))
+    }
+    
+    func test_fetchMovies_forAllMovies_deliversDataSuccessfullyOnSuccessfulHTTPURLResponse() async throws {
+        let json = makeJsonMovieData()
+        let sut = makeSUT()
+        URLProtocolStub.requestHandler = { request in
+            guard let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
+                throw URLError(.badURL)
+            }
+            return (json, response)
+        }
         
-        XCTAssertEqual(movies.first?.id, movieID)
+        let movies = try await sut.fetchMovies(type: .all)
+        
+        XCTAssertEqual(movies.count, 1)
+        XCTAssertEqual(movies.first?.id, 1)
+        XCTAssertEqual(movies.first?.name, "Movie 1")
+        XCTAssertEqual(movies.first?.imageURL, URL(string: "https://image-urls.com/1.jpg"))
+        XCTAssertEqual(movies.first?.year, "2000")
     }
     
     //MARK: - Private helpers

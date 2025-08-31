@@ -123,6 +123,25 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         }
     }
     
+    func test_fetchMovies_deliversErrorOnDecodingError() async throws {
+        let invalidJson = "".data(using: .utf8)!
+        let sut = makeSUT()
+        
+        URLProtocolStub.requestHandler = { request in
+            guard let response = HTTPURLResponse(url: URL(string: "https://any-url-com")!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
+                throw URLError(.badServerResponse)
+            }
+            return (invalidJson, response)
+        }
+        
+        do {
+            _ = try await sut.fetchMovies(type: .all)
+            XCTFail("Expected error. Got success instead.")
+        } catch {
+            XCTAssertNotNil(error as? DecodingError)
+        }
+    }
+    
     //MARK: - Private helpers
     private func makeSUT() -> RemoteMovieRepository {
         let configuration = URLSessionConfiguration.ephemeral

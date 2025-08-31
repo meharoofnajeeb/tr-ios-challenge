@@ -101,6 +101,28 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         XCTAssertEqual(movies.first?.year, "2000")
     }
     
+    func test_fetchMovies_deliversErrorOnNon200HTTPURLResponse() async throws {
+        let sut = makeSUT()
+        
+        URLProtocolStub.requestHandler = { request in
+            guard let response = HTTPURLResponse(url: URL(string: "https://any-url-com")!, statusCode: 500, httpVersion: nil, headerFields: nil) else {
+                throw URLError(.badServerResponse)
+            }
+            return (Data(), response)
+        }
+        
+        do {
+            _ = try await sut.fetchMovies(type: .all)
+            XCTFail("Expected error. Got success instead.")
+        } catch {
+            guard let urlError = error as? URLError else {
+                XCTFail("Expected URLError. Got \(error) instead.")
+                return
+            }
+            XCTAssertEqual(urlError.code, .badServerResponse, "Expected badServerResponse error code.")
+        }
+    }
+    
     //MARK: - Private helpers
     private func makeSUT() -> RemoteMovieRepository {
         let configuration = URLSessionConfiguration.ephemeral

@@ -11,8 +11,8 @@
 		5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */; };
 		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
 		5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF2A2E63D73300A917E5 /* Movie.swift */; };
-		5F92FF3B2E63D8BE00A917E5 /* MoviesTRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF392E63D8BE00A917E5 /* MoviesTRTests.swift */; };
 		5F92FF3E2E63E52900A917E5 /* MoviesFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF3D2E63E52300A917E5 /* MoviesFetching.swift */; };
+		5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF422E63E65800A917E5 /* GetMoviesUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,9 +32,9 @@
 		5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
 		5F92FF2A2E63D73300A917E5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		5F92FF302E63D7AE00A917E5 /* MoviesTRTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviesTRTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F92FF392E63D8BE00A917E5 /* MoviesTRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRTests.swift; sourceTree = "<group>"; };
 		5F92FF3C2E63D9C900A917E5 /* MoviesTR.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MoviesTR.xctestplan; sourceTree = "<group>"; };
 		5F92FF3D2E63E52300A917E5 /* MoviesFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesFetching.swift; sourceTree = "<group>"; };
+		5F92FF422E63E65800A917E5 /* GetMoviesUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoviesUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,9 +169,25 @@
 		5F92FF3A2E63D8BE00A917E5 /* MoviesTRTests */ = {
 			isa = PBXGroup;
 			children = (
-				5F92FF392E63D8BE00A917E5 /* MoviesTRTests.swift */,
+				5F92FF442E63E65800A917E5 /* Domain */,
 			);
 			path = MoviesTRTests;
+			sourceTree = "<group>";
+		};
+		5F92FF432E63E65800A917E5 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF422E63E65800A917E5 /* GetMoviesUseCaseTests.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		5F92FF442E63E65800A917E5 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF432E63E65800A917E5 /* UseCases */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +247,7 @@
 					};
 					5F92FF2F2E63D7AE00A917E5 = {
 						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 1630;
 						TestTargetID = 5F265FFE2E62719F00D7861F;
 					};
 				};
@@ -289,7 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F92FF3B2E63D8BE00A917E5 /* MoviesTRTests.swift in Sources */,
+				5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C8X33J96A7;
@@ -493,6 +511,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.meharoof.MoviesTRTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoviesTR.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MoviesTR";
@@ -503,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C8X33J96A7;

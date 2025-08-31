@@ -61,33 +61,4 @@ final class NetworkServiceTests: XCTestCase {
     private func anyHTTPURLResponse(with url: URL, responseCode: Int) -> HTTPURLResponse {
         return HTTPURLResponse(url: url, statusCode: responseCode, httpVersion: nil, headerFields: nil)!
     }
-    
-    private class URLProtocolStub: URLProtocol {
-        static var requestHandler: ((URLRequest) throws -> (Data, HTTPURLResponse))?
-
-        override class func canInit(with request: URLRequest) -> Bool {
-            return true
-        }
-
-        override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-            return request
-        }
-
-        override func startLoading() {
-            guard let handler = URLProtocolStub.requestHandler else {
-                fatalError("Handler is not set.")
-            }
-            
-            do {
-                let (data, response) = try handler(request)
-                client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-                client?.urlProtocol(self, didLoad: data)
-                client?.urlProtocolDidFinishLoading(self)
-            } catch {
-                client?.urlProtocol(self, didFailWithError: error)
-            }
-        }
-
-        override func stopLoading() {}
-    }
 }

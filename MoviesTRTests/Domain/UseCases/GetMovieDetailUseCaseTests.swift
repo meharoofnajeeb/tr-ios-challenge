@@ -40,9 +40,21 @@ final class GetMovieDetailUseCaseTests: XCTestCase {
         XCTAssertEqual(resultMovieDetail, expectedMovieDetail)
     }
     
+    func test_getMovieDetails_deliversErrorOnFetcherError() async {
+        let expectedError = NSError(domain: "test", code: -1)
+        let (sut, _) = makeSUT(expectedError: expectedError)
+        
+        do {
+            let _ = try await sut.getMovieDetails(for: -1)
+            XCTFail("Expeted error. Got success instead.")
+        } catch {
+            XCTAssertEqual(error as NSError, expectedError)
+        }
+    }
+    
     // MARK: - Private helpers
-    private func makeSUT(exptectedMovie: MovieDetail? = nil) -> (sut: GetMovieDetailUseCase, fetcher: MovieDetailFetcherSpy) {
-        let fetcher = MovieDetailFetcherSpy(movieToReturn: exptectedMovie)
+    private func makeSUT(exptectedMovie: MovieDetail? = nil, expectedError: Error? = nil) -> (sut: GetMovieDetailUseCase, fetcher: MovieDetailFetcherSpy) {
+        let fetcher = MovieDetailFetcherSpy(movieToReturn: exptectedMovie, expectedError: expectedError)
         let sut = GetMovieDetailUseCase(fetcher: fetcher)
         return (sut, fetcher)
     }
@@ -50,13 +62,18 @@ final class GetMovieDetailUseCaseTests: XCTestCase {
     private class MovieDetailFetcherSpy: MovieDetailFetching {
         var fetchMovieDetailsCallCount = 0
         private var movieToReturn: MovieDetail?
+        private var error: Error?
         
-        init(movieToReturn: MovieDetail?) {
+        init(movieToReturn: MovieDetail? = nil, expectedError: Error? = nil) {
             self.movieToReturn = movieToReturn
+            self.error = expectedError
         }
         
         func fetchMovieDetails(for id: Int) async throws -> MovieDetail {
             fetchMovieDetailsCallCount += 1
+            if let error {
+                throw error
+            }
             return movieToReturn!
         }
     }

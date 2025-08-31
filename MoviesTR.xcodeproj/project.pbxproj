@@ -15,6 +15,7 @@
 		5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF422E63E65800A917E5 /* GetMoviesUseCaseTests.swift */; };
 		5F92FF472E63FCBD00A917E5 /* GetMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF462E63FCB800A917E5 /* GetMoviesUseCase.swift */; };
 		5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */; };
+		5F92FF512E63FDE700A917E5 /* MovieDetailFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		5F92FF422E63E65800A917E5 /* GetMoviesUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoviesUseCaseTests.swift; sourceTree = "<group>"; };
 		5F92FF462E63FCB800A917E5 /* GetMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoviesUseCase.swift; sourceTree = "<group>"; };
 		5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailFetching.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				5F92FF3D2E63E52300A917E5 /* MoviesFetching.swift */,
+				5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				5F92FF3E2E63E52900A917E5 /* MoviesFetching.swift in Sources */,
 				5F92FF472E63FCBD00A917E5 /* GetMoviesUseCase.swift in Sources */,
 				5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */,
+				5F92FF512E63FDE700A917E5 /* MovieDetailFetching.swift in Sources */,
 				5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,
 				5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */,

@@ -48,18 +48,7 @@ final class RemoteMovieRepository: MoviesFetching {
 final class RemoteMovieRepositoryTests: XCTestCase {
 
     func test_fetchMovies_forAllMovies_constructsURLCorrectlyForAllMoviesAnddeliversResponseSuccessfully() async throws {
-        let json = """
-{
-    "movies" : [
-        {
-            "id": 1,
-            "name": "Movie 1",
-            "thumbnail": "https://image-urls.com/1.jpg",
-            "year": 2000
-        }
-    ]
-}
-""".data(using: .utf8)!
+        let json = makeJsonMovieData()
         let sut = makeSUT()
         URLProtocolStub.requestHandler = { [weak self] request in
             XCTAssertEqual(request.url?.absoluteString, self?.listAllURLString)
@@ -81,18 +70,7 @@ final class RemoteMovieRepositoryTests: XCTestCase {
     
     func test_fetchMovies_forRecommendedMovies_constructsAppropriateURLForRecommendedMovies() async throws {
         let movieID = 2
-        let json = """
-{
-    "movies" : [
-        {
-            "id": \(movieID),
-            "name": "Movie 2",
-            "thumbnail": "https://image-urls.com/2.jpg",
-            "year": 2000
-        }
-    ]
-}
-""".data(using: .utf8)!
+        let json = makeJsonMovieData(movieID: movieID)
         let sut = makeSUT()
         URLProtocolStub.requestHandler = { [weak self] request in
             guard let self else {
@@ -123,6 +101,21 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         }
         let sut = RemoteMovieRepository(networkService: networkService)
         return sut
+    }
+    
+    private func makeJsonMovieData(movieID: Int = 1, year: Int = 2000) -> Data {
+        return """
+{
+    "movies" : [
+        {
+            "id": \(movieID),
+            "name": "Movie \(movieID)",
+            "thumbnail": "https://image-urls.com/\(movieID).jpg",
+            "year": \(year)
+        }
+    ]
+}
+""".data(using: .utf8)!
     }
     
     private var listAllURLString: String {

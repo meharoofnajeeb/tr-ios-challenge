@@ -10,6 +10,12 @@ import XCTest
 
 final class GetMoviesUseCaseTests: XCTestCase {
     
+    func test_init_doesNotMessageFetcher() {
+        let (_, fetcher) = makeSUT()
+        
+        XCTAssertEqual(fetcher.fetchAllCallCount, 0)
+    }
+    
     func test_getMovies_deliversMoviesOnFetcherSuccess() async throws {
         let expectedMovie = Movie(id: 1, name: "Movie 1", imageURL: URL(string: "http://any-url.com")!, year: "2000")
         let (sut, fetcher) = makeSUT(moviesToReturn: [expectedMovie])

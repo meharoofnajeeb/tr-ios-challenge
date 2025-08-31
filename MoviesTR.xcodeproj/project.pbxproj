@@ -16,6 +16,7 @@
 		5F92FF472E63FCBD00A917E5 /* GetMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF462E63FCB800A917E5 /* GetMoviesUseCase.swift */; };
 		5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */; };
 		5F92FF512E63FDE700A917E5 /* MovieDetailFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */; };
+		5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		5F92FF462E63FCB800A917E5 /* GetMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoviesUseCase.swift; sourceTree = "<group>"; };
 		5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		5F92FF502E63FDE300A917E5 /* MovieDetailFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailFetching.swift; sourceTree = "<group>"; };
+		5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				5F92FF422E63E65800A917E5 /* GetMoviesUseCaseTests.swift */,
+				5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */,
 				5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

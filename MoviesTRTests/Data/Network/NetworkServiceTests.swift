@@ -13,9 +13,11 @@ final class NetworkServiceTests: XCTestCase {
         let expectedData = Data("{}".utf8)
         let url = URL(string: "https://any-url.com")!
         let sut = makeSUT()
-        URLProtocolStub.requestHandler = { request in
+        URLProtocolStub.requestHandler = { [weak self] request in
             XCTAssertEqual(request.url, url)
-            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            guard let response = self?.anyHTTPURLResponse(with: url, responseCode: 200) else {
+                fatalError("Possible memory issue.")
+            }
             return (expectedData, response)
         }
         
@@ -29,8 +31,10 @@ final class NetworkServiceTests: XCTestCase {
     func test_fetchData_throwsErrorOnNon200StatusCode() async {
         let url = URL(string: "https://not-found-url.com")!
         let sut = makeSUT()
-        URLProtocolStub.requestHandler = { request in
-            let response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)!
+        URLProtocolStub.requestHandler = { [weak self] request in
+            guard let response = self?.anyHTTPURLResponse(with: url, responseCode: 404) else {
+                fatalError("Possible memory issue.")
+            }
             return (Data(), response)
         }
         
@@ -49,6 +53,10 @@ final class NetworkServiceTests: XCTestCase {
         let session = URLSession(configuration: configuration)
         let sut = NetworkService(session: session)
         return sut
+    }
+    
+    private func anyHTTPURLResponse(with url: URL, responseCode: Int) -> HTTPURLResponse {
+        return HTTPURLResponse(url: url, statusCode: responseCode, httpVersion: nil, headerFields: nil)!
     }
     
     private class URLProtocolStub: URLProtocol {

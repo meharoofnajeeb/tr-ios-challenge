@@ -17,6 +17,7 @@
 		5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */; };
 		5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */; };
 		5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */; };
+		5F92FF5D2E646EFA00A917E5 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF5C2E646EF400A917E5 /* NetworkServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		5F92FF4A2E63FCE900A917E5 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailUseCaseTests.swift; sourceTree = "<group>"; };
 		5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailsUseCase.swift; sourceTree = "<group>"; };
+		5F92FF5C2E646EF400A917E5 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		5F92FF3A2E63D8BE00A917E5 /* MoviesTRTests */ = {
 			isa = PBXGroup;
 			children = (
+				5F92FF5A2E646EE700A917E5 /* Data */,
 				5F92FF442E63E65800A917E5 /* Domain */,
 			);
 			path = MoviesTRTests;
@@ -200,6 +203,22 @@
 				5F92FF432E63E65800A917E5 /* UseCases */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		5F92FF5A2E646EE700A917E5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF5B2E646EEC00A917E5 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5F92FF5B2E646EEC00A917E5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5F92FF5C2E646EF400A917E5 /* NetworkServiceTests.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */,
+				5F92FF5D2E646EFA00A917E5 /* NetworkServiceTests.swift in Sources */,
 				5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

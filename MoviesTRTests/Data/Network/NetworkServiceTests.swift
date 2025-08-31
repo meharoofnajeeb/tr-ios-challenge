@@ -52,6 +52,9 @@ final class NetworkServiceTests: XCTestCase {
         configuration.protocolClasses = [URLProtocolStub.self]
         let session = URLSession(configuration: configuration)
         let sut = NetworkService(session: session)
+        addTeardownBlock {
+            URLProtocolStub.requestHandler = nil
+        }
         return sut
     }
     

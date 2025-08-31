@@ -16,7 +16,12 @@ final class NetworkService {
     }
     
     func fetchData(from url: URL) async throws -> Data {
-        let (data, _) = try await session.data(from: url)
+        let (data, response) = try await session.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
         
         return data
     }
@@ -26,10 +31,7 @@ final class NetworkServiceTests: XCTestCase {
     func test_fetchData_deliversDataOnSuccessfulResponse() async throws {
         let expectedData = Data("{}".utf8)
         let url = URL(string: "https://any-url.com")!
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [URLProtocolStub.self]
-        let session = URLSession(configuration: configuration)
-        let sut = NetworkService(session: session)
+        let sut = makeSUT()
         URLProtocolStub.requestHandler = { request in
             XCTAssertEqual(request.url, url)
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
@@ -41,7 +43,33 @@ final class NetworkServiceTests: XCTestCase {
         XCTAssertEqual(resultData, expectedData)
     }
     
+    
+    
+    func test_fetchData_throwsErrorOnNon200StatusCode() async {
+        let url = URL(string: "https://not-found-url.com")!
+        let sut = makeSUT()
+        URLProtocolStub.requestHandler = { request in
+            let response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)!
+            return (Data(), response)
+        }
+        
+        do {
+            _ = try await sut.fetchData(from: url)
+            XCTFail("Expected error. Got success instead.")
+        } catch {
+            XCTAssertEqual((error as? URLError)?.code, .badServerResponse)
+        }
+    }
+    
     // MARK: - Private helpers
+    private func makeSUT() -> NetworkService {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLProtocolStub.self]
+        let session = URLSession(configuration: configuration)
+        let sut = NetworkService(session: session)
+        return sut
+    }
+    
     private class URLProtocolStub: URLProtocol {
         static var requestHandler: ((URLRequest) throws -> (Data, HTTPURLResponse))?
 

@@ -24,8 +24,7 @@ final class GetMoviesUseCaseTests: XCTestCase {
     
     func test_getMovies_deliversMoviesOnFetcherSuccess() async throws {
         let expectedMovie = Movie(id: 1, name: "Movie 1", imageURL: URL(string: "http://any-url.com")!, year: "2000")
-        let fetcher = MoviesFetcherSpy(moviesToReturn: [expectedMovie])
-        let sut = GetMoviesUseCase(fetcher: fetcher)
+        let sut = makeSUT(moviesToReturn: [expectedMovie])
         
         let movies = try await sut.getMovies()
         
@@ -34,8 +33,7 @@ final class GetMoviesUseCaseTests: XCTestCase {
     
     func test_getMovies_deliversErrorOnFetcherError() async {
         let expectedError = NSError(domain: "test", code: -1)
-        let fetcher = MoviesFetcherSpy(errorToThrow: expectedError)
-        let sut = GetMoviesUseCase(fetcher: fetcher)
+        let sut = makeSUT(errorToThrow: expectedError)
         
         do {
             let _ = try await sut.getMovies()
@@ -46,6 +44,12 @@ final class GetMoviesUseCaseTests: XCTestCase {
     }
     
     // MARK: - Private helpers
+    private func makeSUT(moviesToReturn: [Movie] = [], errorToThrow: Error? = nil) -> GetMoviesUseCase {
+        let fetcher = MoviesFetcherSpy(moviesToReturn: moviesToReturn, errorToThrow: errorToThrow)
+        let sut = GetMoviesUseCase(fetcher: fetcher)
+        return sut
+    }
+    
     private class MoviesFetcherSpy: MoviesFetching {
         private let moviesToReturn: [Movie]
         private var error: Error?

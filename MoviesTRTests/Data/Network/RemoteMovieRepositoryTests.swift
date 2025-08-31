@@ -32,8 +32,12 @@ final class RemoteMovieRepository: MoviesFetching {
     
     // MARK: - MoviesFetching
     func fetchMovies(type: MoviesType) async throws -> [Movie] {
-        guard let url = URL(string: "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/list.json") else {
-            throw URLError(.badURL)
+        let url: URL
+        switch type {
+        case .all:
+            url = URL(string: "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/list.json")!
+        case .recommended(let id):
+            url = URL(string: String(format: "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/recommended/%d.json", id))!
         }
         let data = try await networkService.fetchData(from: url)
         let results = (try JSONDecoder().decode(Root.self, from: data)).movieObjects
@@ -43,7 +47,7 @@ final class RemoteMovieRepository: MoviesFetching {
 
 final class RemoteMovieRepositoryTests: XCTestCase {
 
-    func test_fetchMovies_forAllMovies_deliversResponseSuccessfullyForAllMovies() async throws {
+    func test_fetchMovies_forAllMovies_constructsURLCorrectlyForAllMoviesAnddeliversResponseSuccessfully() async throws {
         let json = """
 {
     "movies" : [
@@ -56,14 +60,7 @@ final class RemoteMovieRepositoryTests: XCTestCase {
     ]
 }
 """.data(using: .utf8)!
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [URLProtocolStub.self]
-        let session = URLSession(configuration: configuration)
-        let networkService = NetworkService(session: session)
-        addTeardownBlock {
-            URLProtocolStub.requestHandler = nil
-        }
-        let sut = RemoteMovieRepository(networkService: networkService)
+        let sut = makeSUT()
         URLProtocolStub.requestHandler = { [weak self] request in
             XCTAssertEqual(request.url?.absoluteString, self?.listAllURLString)
             guard let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
@@ -82,8 +79,57 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         XCTAssertEqual(movies.first?.year, "2000")
     }
     
+    func test_fetchMovies_forRecommendedMovies_constructsAppropriateURLForRecommendedMovies() async throws {
+        let movieID = 2
+        let json = """
+{
+    "movies" : [
+        {
+            "id": \(movieID),
+            "name": "Movie 2",
+            "thumbnail": "https://image-urls.com/2.jpg",
+            "year": 2000
+        }
+    ]
+}
+""".data(using: .utf8)!
+        let sut = makeSUT()
+        URLProtocolStub.requestHandler = { [weak self] request in
+            guard let self else {
+                fatalError("Potential memory issue.")
+            }
+            let recommendedURLString = String(format: "\(self.recommendedListURLString)", movieID)
+            XCTAssertEqual(request.url?.absoluteString, recommendedURLString)
+            guard let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
+                XCTFail("Error forming URL.")
+                throw URLError(.badURL)
+            }
+            return (json, response)
+        }
+        
+        let movies = try await sut.fetchMovies(type: .recommended(movieID))
+        
+        XCTAssertEqual(movies.first?.id, movieID)
+    }
+    
     //MARK: - Private helpers
-    var listAllURLString: String {
+    private func makeSUT() -> RemoteMovieRepository {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLProtocolStub.self]
+        let session = URLSession(configuration: configuration)
+        let networkService = NetworkService(session: session)
+        addTeardownBlock {
+            URLProtocolStub.requestHandler = nil
+        }
+        let sut = RemoteMovieRepository(networkService: networkService)
+        return sut
+    }
+    
+    private var listAllURLString: String {
         return "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/list.json"
+    }
+    
+    private var recommendedListURLString: String {
+        return "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/recommended/%d.json"
     }
 }

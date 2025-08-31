@@ -7,7 +7,7 @@
 
 enum MoviesType {
     case all
-    case recommended
+    case recommended(Int)
 }
 
 protocol MoviesFetching {

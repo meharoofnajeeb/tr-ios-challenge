@@ -41,17 +41,23 @@ final class GetMovieDetailUseCaseTests: XCTestCase {
     }
     
     // MARK: - Private helpers
+    private func makeSUT(exptectedMovie: MovieDetail? = nil) -> (sut: GetMovieDetailUseCase, fetcher: MovieDetailFetcherSpy) {
+        let fetcher = MovieDetailFetcherSpy(movieToReturn: exptectedMovie)
+        let sut = GetMovieDetailUseCase(fetcher: fetcher)
+        return (sut, fetcher)
+    }
+    
     private class MovieDetailFetcherSpy: MovieDetailFetching {
         var fetchMovieDetailsCallCount = 0
-        private let movieToReturn: MovieDetail
+        private var movieToReturn: MovieDetail?
         
-        init(movieToReturn: MovieDetail) {
+        init(movieToReturn: MovieDetail?) {
             self.movieToReturn = movieToReturn
         }
         
         func fetchMovieDetails(for id: Int) async throws -> MovieDetail {
             fetchMovieDetailsCallCount += 1
-            return movieToReturn
+            return movieToReturn!
         }
     }
 }

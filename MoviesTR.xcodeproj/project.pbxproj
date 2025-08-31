@@ -18,6 +18,7 @@
 		5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */; };
 		5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */; };
 		5F92FF5D2E646EFA00A917E5 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF5C2E646EF400A917E5 /* NetworkServiceTests.swift */; };
+		5F92FF622E64BF5E00A917E5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF612E64BF5700A917E5 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		5F92FF522E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailUseCaseTests.swift; sourceTree = "<group>"; };
 		5F92FF542E64379F00A917E5 /* GetMovieDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailsUseCase.swift; sourceTree = "<group>"; };
 		5F92FF5C2E646EF400A917E5 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		5F92FF612E64BF5700A917E5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		5F92FF262E62FAB700A917E5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5F92FF612E64BF5700A917E5 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 			files = (
 				5F92FF3E2E63E52900A917E5 /* MovieRepository.swift in Sources */,
 				5F92FF472E63FCBD00A917E5 /* GetMoviesUseCase.swift in Sources */,
+				5F92FF622E64BF5E00A917E5 /* NetworkService.swift in Sources */,
 				5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */,
 				5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,

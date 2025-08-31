@@ -8,25 +8,6 @@
 import XCTest
 @testable import MoviesTR
 
-final class NetworkService {
-    let session: URLSession
-    
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    
-    func fetchData(from url: URL) async throws -> Data {
-        let (data, response) = try await session.data(from: url)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-        
-        return data
-    }
-}
-
 final class NetworkServiceTests: XCTestCase {
     func test_fetchData_deliversDataOnSuccessfulResponse() async throws {
         let expectedData = Data("{}".utf8)

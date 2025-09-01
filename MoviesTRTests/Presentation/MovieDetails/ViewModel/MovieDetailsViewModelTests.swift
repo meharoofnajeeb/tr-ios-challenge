@@ -12,8 +12,7 @@ final class MovieDetailsViewModelTests: XCTestCase {
     func test_fetchMovieDetails_fetchesMovieDetailsAndUpdatesViewModelStates() async {
         let movieID = 1
         let movieDetails = getAnyMovieDetail(with: movieID)
-        let getMovieDetailsUseCase = GetMovieDetailsUseCaseMock(movieDetails: movieDetails)
-        let sut = MovieDetailViewModel(getMovieDetailsUseCase: getMovieDetailsUseCase, movieID: movieID)
+        let (sut, getMovieDetailsUseCase) = makeSUT(withResult: .success(movieDetails), movieID: movieID)
         
         await sut.fetchMovieDetails()
         
@@ -23,7 +22,24 @@ final class MovieDetailsViewModelTests: XCTestCase {
         XCTAssertNil(sut.errorMessage)
     }
     
+    func test_fetchMovieDetails_setsErrorOnFailure() async {
+        let expectedError = NSError(domain: "Test", code: -1)
+        let (sut, _) = makeSUT(withResult: .failure(expectedError), movieID: -1)
+        
+        await sut.fetchMovieDetails()
+        
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertNil(sut.movieDetails)
+        XCTAssertNotNil(sut.errorMessage)
+    }
+    
     //MARK: - Private helpers
+    private func makeSUT(withResult result: Result<MovieDetail, Error>, movieID: Int) -> (sut: MovieDetailViewModel, getMovieDetailUseCase: GetMovieDetailsUseCaseMock) {
+        let getMovieDetailsUseCase = GetMovieDetailsUseCaseMock(result: result)
+        let sut = MovieDetailViewModel(getMovieDetailsUseCase: getMovieDetailsUseCase, movieID: movieID)
+        return (sut, getMovieDetailsUseCase)
+    }
+    
     private func getAnyMovieDetail(with id: Int) -> MovieDetail {
         return MovieDetail(id: id,
                            name: "Movie \(id)",
@@ -36,15 +52,15 @@ final class MovieDetailsViewModelTests: XCTestCase {
     
     private class GetMovieDetailsUseCaseMock: GetMovieDetailsUseCaseProtocol {
         private(set) var getMovieDetailsCallCount = 0
-        var movieDetails: MovieDetail?
+        var result: Result<MovieDetail, Error>
         
-        init(movieDetails: MovieDetail? = nil) {
-            self.movieDetails = movieDetails
+        init(result: Result<MovieDetail, Error>) {
+            self.result = result
         }
         
         func getMovieDetails(for id: Int) async throws -> MovieDetail {
             getMovieDetailsCallCount += 1
-            return movieDetails!
+            return try result.get()
         }
     }
 }

@@ -25,7 +25,9 @@ final class MovieDetailViewModel {
         errorMessage = nil
         do {
             movieDetails = try await getMovieDetailsUseCase.getMovieDetails(for: movieID)
-        } catch {}
+        } catch {
+            errorMessage = "Some error occured - \(error.localizedDescription). Please try again."
+        }
         isLoading = false
     }
 }

@@ -5,7 +5,11 @@
 //  Created by Meharoof Najeeb on 2025-08-31.
 //
 
-final class GetMovieDetailUseCase {
+protocol GetMovieDetailsUseCaseProtocol {
+    func getMovieDetails(for id: Int) async throws -> MovieDetail
+}
+
+final class GetMovieDetailUseCase: GetMovieDetailsUseCaseProtocol {
     private let fetcher: MovieDetailFetching
     
     init(fetcher: MovieDetailFetching) {

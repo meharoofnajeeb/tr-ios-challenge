@@ -9,6 +9,15 @@
     }
   ],
   "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:MoviesTR.xcodeproj",
+          "identifier" : "5F265FFE2E62719F00D7861F",
+          "name" : "MoviesTR"
+        }
+      ]
+    },
     "targetForVariableExpansion" : {
       "containerPath" : "container:MoviesTR.xcodeproj",
       "identifier" : "5F265FFE2E62719F00D7861F",

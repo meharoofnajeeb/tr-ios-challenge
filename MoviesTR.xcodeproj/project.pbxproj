@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */; };
-		5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */; };
+		5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */; };
 		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
 		5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF2A2E63D73300A917E5 /* Movie.swift */; };
 		5F92FF3E2E63E52900A917E5 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF3D2E63E52300A917E5 /* MovieRepository.swift */; };
@@ -24,6 +24,9 @@
 		5FCFC83E2E65134500FB41D1 /* RemoteMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC83D2E65133E00FB41D1 /* RemoteMovieRepository.swift */; };
 		5FCFC8442E657B1400FB41D1 /* MoviesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC8432E657B1400FB41D1 /* MoviesListViewModelTests.swift */; };
 		5FCFC8462E658AAD00FB41D1 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC8452E658AA700FB41D1 /* MoviesListViewModel.swift */; };
+		5FCFC8492E6593C200FB41D1 /* MovieListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC8482E6593C200FB41D1 /* MovieListRow.swift */; };
+		5FCFC84C2E65954500FB41D1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5FCFC84B2E65954500FB41D1 /* SDWebImageSwiftUI */; };
+		5FCFC84F2E65961600FB41D1 /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC84E2E65961600FB41D1 /* MovieDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +43,7 @@
 		5F265FFF2E62719F00D7861F /* MoviesTR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesTR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRApp.swift; sourceTree = "<group>"; };
 		5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
+		5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
 		5F92FF2A2E63D73300A917E5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		5F92FF302E63D7AE00A917E5 /* MoviesTRTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviesTRTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F92FF3C2E63D9C900A917E5 /* MoviesTR.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MoviesTR.xctestplan; sourceTree = "<group>"; };
@@ -57,6 +60,8 @@
 		5FCFC83D2E65133E00FB41D1 /* RemoteMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieRepository.swift; sourceTree = "<group>"; };
 		5FCFC8432E657B1400FB41D1 /* MoviesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModelTests.swift; sourceTree = "<group>"; };
 		5FCFC8452E658AA700FB41D1 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
+		5FCFC8482E6593C200FB41D1 /* MovieListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListRow.swift; sourceTree = "<group>"; };
+		5FCFC84E2E65961600FB41D1 /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FCFC84C2E65954500FB41D1 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +140,7 @@
 		5F92FF1A2E62E43C00A917E5 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5FCFC84D2E65960100FB41D1 /* MovieDetails */,
 				5F92FF232E62E59E00A917E5 /* MoviesList */,
 			);
 			path = Presentation;
@@ -154,8 +161,9 @@
 		5F92FF232E62E59E00A917E5 /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
+				5FCFC8472E6593B100FB41D1 /* Components */,
 				5FCFC8412E657AE400FB41D1 /* ViewModel */,
-				5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */,
+				5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */,
 			);
 			path = MoviesList;
 			sourceTree = "<group>";
@@ -279,6 +287,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		5FCFC8472E6593B100FB41D1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFC8482E6593C200FB41D1 /* MovieListRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5FCFC84D2E65960100FB41D1 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFC84E2E65961600FB41D1 /* MovieDetailsView.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -296,6 +320,7 @@
 			);
 			name = MoviesTR;
 			packageProductDependencies = (
+				5FCFC84B2E65954500FB41D1 /* SDWebImageSwiftUI */,
 			);
 			productName = MoviesTR;
 			productReference = 5F265FFF2E62719F00D7861F /* MoviesTR.app */;
@@ -350,6 +375,9 @@
 			);
 			mainGroup = 5F265FF62E62719F00D7861F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5FCFC84A2E65948100FB41D1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5F2660002E62719F00D7861F /* Products */;
 			projectDirPath = "";
@@ -384,14 +412,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FCFC8492E6593C200FB41D1 /* MovieListRow.swift in Sources */,
 				5FCFC83E2E65134500FB41D1 /* RemoteMovieRepository.swift in Sources */,
 				5F92FF3E2E63E52900A917E5 /* MovieRepository.swift in Sources */,
 				5F92FF472E63FCBD00A917E5 /* GetMoviesUseCase.swift in Sources */,
 				5F92FF622E64BF5E00A917E5 /* NetworkService.swift in Sources */,
 				5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */,
+				5FCFC84F2E65961600FB41D1 /* MovieDetailsView.swift in Sources */,
 				5FCFC8462E658AAD00FB41D1 /* MoviesListViewModel.swift in Sources */,
 				5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */,
-				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,
+				5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */,
 				5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */,
 				5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */,
 			);
@@ -668,6 +698,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5FCFC84A2E65948100FB41D1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5FCFC84B2E65954500FB41D1 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FCFC84A2E65948100FB41D1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5F265FF72E62719F00D7861F /* Project object */;
 }

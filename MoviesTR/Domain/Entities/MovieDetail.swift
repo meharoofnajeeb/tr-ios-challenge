@@ -14,5 +14,5 @@ struct MovieDetail: Identifiable, Equatable {
     let notes: String
     let rating: String
     let imageURL: URL
-    let releaseDate: String
+    let releaseDate: Date
 }

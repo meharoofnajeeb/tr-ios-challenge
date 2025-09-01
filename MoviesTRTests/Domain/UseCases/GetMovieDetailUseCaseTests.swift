@@ -48,7 +48,7 @@ final class GetMovieDetailUseCaseTests: XCTestCase {
     }
     
     private func anyMovieDetail(movieID: Int = 1) -> MovieDetail {
-        return MovieDetail(id: movieID, name: "Movie 1", description: "Description1", notes: "Notes 1", rating: "10", imageURL: URL(string: "http://any-url.com")!, releaseDate: "2000")
+        return MovieDetail(id: movieID, name: "Movie 1", description: "Description1", notes: "Notes 1", rating: "10", imageURL: URL(string: "http://any-url.com")!, releaseDate: Date())
     }
     
     private class MovieDetailFetcherSpy: MovieDetailFetching {

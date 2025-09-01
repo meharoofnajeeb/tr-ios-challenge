@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class RemoteMovieRepository: MoviesFetching {
+final class RemoteMovieRepository: MovieRepository {
     private let networkService: NetworkService
     
     init(networkService: NetworkService) {
@@ -41,5 +41,15 @@ final class RemoteMovieRepository: MoviesFetching {
         let data = try await networkService.fetchData(from: url)
         let results = (try JSONDecoder().decode(Root.self, from: data)).movieObjects
         return results
+    }
+    
+    // MARK: - MovieDetailsFetching
+    func fetchMovieDetails(for id: Int) async throws -> MovieDetail {
+        guard let url = URL(string: String(format: "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/%d.json", id)) else {
+            throw URLError(.badURL)
+        }
+        
+        _ = try await networkService.fetchData(from: url)
+        return MovieDetail(id: -1, name: "", description: "", notes: "", rating: "", imageURL: URL(string: "http://anyurl.com")!, releaseDate: Date())
     }
 }

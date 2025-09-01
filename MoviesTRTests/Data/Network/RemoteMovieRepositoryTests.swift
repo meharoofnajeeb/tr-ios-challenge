@@ -105,6 +105,37 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         }
     }
     
+    func test_fetchMovieDetails_constructsURLCorrectly() async throws {
+        let movieID = 1
+        let json = """
+{
+    "id": \(movieID),
+      "name": "Movie \(movieID)",
+      "Description": "Some random description for Movie \(movieID)",
+      "Notes": "Some random notes for Movie \(movieID)",
+      "Rating": 10,
+      "picture": "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/\(movieID).jpg",
+      "releaseDate": 946684800
+}
+""".data(using: .utf8)!
+        let sut = makeSUT()
+        
+        URLProtocolStub.requestHandler = { [weak self] request in
+            guard let self else {
+                fatalError("Potential memory issue.")
+            }
+            let movieDetailsURLString = String(format: "\(self.movieDetailsURLString)", movieID)
+            XCTAssertEqual(request.url?.absoluteString, movieDetailsURLString)
+            guard let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
+                XCTFail("Error forming URL.")
+                throw URLError(.badURL)
+            }
+            return (json, response)
+        }
+        
+        _ = try await sut.fetchMovieDetails(for: movieID)
+    }
+    
     //MARK: - Private helpers
     private func makeSUT() -> RemoteMovieRepository {
         let configuration = URLSessionConfiguration.ephemeral
@@ -139,5 +170,9 @@ final class RemoteMovieRepositoryTests: XCTestCase {
     
     private var recommendedListURLString: String {
         return "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/recommended/%d.json"
+    }
+    
+    private var movieDetailsURLString: String {
+        return "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/%d.json"
     }
 }

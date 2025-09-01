@@ -24,7 +24,9 @@ final class MoviesListViewModel: ObservableObject {
         errorMessage = nil
         do {
             movies = try await getMoviesUseCase.getMovies(type: .all)
-        } catch {}
+        } catch {
+            errorMessage = "Some error occured - \(error.localizedDescription). Please try again."
+        }
         isLoading = false
     }
 }

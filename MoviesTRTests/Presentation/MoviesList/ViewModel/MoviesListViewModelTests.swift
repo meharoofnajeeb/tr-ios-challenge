@@ -13,8 +13,7 @@ final class MoviesListViewModelTests: XCTestCase {
 
     func test_fetchMovies_setsMoviesOnSuccess() async {
         let mockMovies = [Movie(id: 1, name: "Movie 1", imageURL: URL(string: "https://any-url-1.com")!, year: "2000")]
-        let getMoviesUseCase = GetMoviesUseCaseMock(movies: mockMovies)
-        let sut = MoviesListViewModel(getMoviesUseCase: getMoviesUseCase)
+        let (sut, getMoviesUseCase) = makeSUT(withResult: .success(mockMovies))
         
         await sut.fetchMovies()
         
@@ -23,19 +22,36 @@ final class MoviesListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.movies, mockMovies)
         XCTAssertNil(sut.errorMessage)
     }
+    
+    func test_fetchMovies_setsErrorOnFailure() async {
+        let expectedError = NSError(domain: "Test", code: -1)
+        let (sut, _) = makeSUT(withResult: .failure(expectedError))
+        
+        await sut.fetchMovies()
+        
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertTrue(sut.movies.isEmpty)
+        XCTAssertNotNil(sut.errorMessage)
+    }
 
     // MARK: - Private helpers
+    private func makeSUT(withResult result: Result<[Movie], Error>) -> (sut: MoviesListViewModel, getMoviesUseCase: GetMoviesUseCaseMock){
+        let getMoviesUseCase = GetMoviesUseCaseMock(result: result)
+        let sut = MoviesListViewModel(getMoviesUseCase: getMoviesUseCase)
+        return (sut, getMoviesUseCase)
+    }
+    
     private class GetMoviesUseCaseMock: GetMoviesUseCaseProtocol {
         private(set) var getMoviesCallCount = 0
-        var movies: [Movie]
+        var result: Result<[Movie], Error>
         
-        init(movies: [Movie] = [Movie]()) {
-            self.movies = movies
+        init(result: Result<[Movie], Error>) {
+            self.result = result
         }
         
         func getMovies(type: MoviesType) async throws -> [Movie] {
             getMoviesCallCount += 1
-            return movies
+            return try result.get()
         }
     }
 }

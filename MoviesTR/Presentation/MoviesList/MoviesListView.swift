@@ -29,6 +29,23 @@ struct MoviesListView: View {
                 }
             }
             .navigationTitle("All movies")
+            .toolbar {
+                if viewModel.errorMessage != nil {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            Task {
+                                await viewModel.fetchMovies()
+                            }
+                        } label: {
+                            if viewModel.isLoading {
+                                ProgressView()
+                            } else {
+                                Image(systemName: "arrow.clockwise")
+                            }
+                        }
+                    }
+                }
+            }
             .task {
                 await viewModel.fetchMovies()
             }

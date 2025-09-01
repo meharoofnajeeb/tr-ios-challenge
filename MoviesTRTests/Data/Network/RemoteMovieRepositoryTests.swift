@@ -149,6 +149,25 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         XCTAssertEqual(movieDetail.releaseDate.timeIntervalSince1970, 946684800)
     }
     
+    func test_fetchMovieDetails_deliversErrorOnDecodingError() async {
+        let invalidJson = "".data(using: .utf8)!
+        let sut = makeSUT()
+        
+        URLProtocolStub.requestHandler = { request in
+            guard let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
+                throw URLError(.badURL)
+            }
+            return (invalidJson, response)
+        }
+        
+        do {
+            _ = try await sut.fetchMovieDetails(for: -1)
+            XCTFail("Expected error. Got success instead.")
+        } catch {
+            XCTAssertNotNil(error as? DecodingError)
+        }
+    }
+    
     //MARK: - Private helpers
     private func makeSUT() -> RemoteMovieRepository {
         let configuration = URLSessionConfiguration.ephemeral

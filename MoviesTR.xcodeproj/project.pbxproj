@@ -22,6 +22,8 @@
 		5F92FF642E64EA2F00A917E5 /* RemoteMovieRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF632E64EA2F00A917E5 /* RemoteMovieRepositoryTests.swift */; };
 		5F92FF672E64EAB900A917E5 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF662E64EAB400A917E5 /* URLProtocolStub.swift */; };
 		5FCFC83E2E65134500FB41D1 /* RemoteMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC83D2E65133E00FB41D1 /* RemoteMovieRepository.swift */; };
+		5FCFC8442E657B1400FB41D1 /* MoviesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC8432E657B1400FB41D1 /* MoviesListViewModelTests.swift */; };
+		5FCFC8462E658AAD00FB41D1 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFC8452E658AA700FB41D1 /* MoviesListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		5F92FF632E64EA2F00A917E5 /* RemoteMovieRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieRepositoryTests.swift; sourceTree = "<group>"; };
 		5F92FF662E64EAB400A917E5 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		5FCFC83D2E65133E00FB41D1 /* RemoteMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieRepository.swift; sourceTree = "<group>"; };
+		5FCFC8432E657B1400FB41D1 /* MoviesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModelTests.swift; sourceTree = "<group>"; };
+		5FCFC8452E658AA700FB41D1 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 		5F92FF232E62E59E00A917E5 /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
+				5FCFC8412E657AE400FB41D1 /* ViewModel */,
 				5F92FF1C2E62E43C00A917E5 /* MoviesList.swift */,
 			);
 			path = MoviesList;
@@ -194,6 +199,7 @@
 			children = (
 				5F92FF5A2E646EE700A917E5 /* Data */,
 				5F92FF442E63E65800A917E5 /* Domain */,
+				5FCFC83F2E657AB000FB41D1 /* Presentation */,
 			);
 			path = MoviesTRTests;
 			sourceTree = "<group>";
@@ -239,6 +245,38 @@
 				5F92FF662E64EAB400A917E5 /* URLProtocolStub.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5FCFC83F2E657AB000FB41D1 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFC8402E657ACE00FB41D1 /* MoviesList */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		5FCFC8402E657ACE00FB41D1 /* MoviesList */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFC8422E657AF700FB41D1 /* ViewModel */,
+			);
+			path = MoviesList;
+			sourceTree = "<group>";
+		};
+		5FCFC8412E657AE400FB41D1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFC8452E658AA700FB41D1 /* MoviesListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5FCFC8422E657AF700FB41D1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFC8432E657B1400FB41D1 /* MoviesListViewModelTests.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +389,7 @@
 				5F92FF472E63FCBD00A917E5 /* GetMoviesUseCase.swift in Sources */,
 				5F92FF622E64BF5E00A917E5 /* NetworkService.swift in Sources */,
 				5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */,
+				5FCFC8462E658AAD00FB41D1 /* MoviesListViewModel.swift in Sources */,
 				5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesList.swift in Sources */,
 				5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */,
@@ -365,6 +404,7 @@
 				5F92FF642E64EA2F00A917E5 /* RemoteMovieRepositoryTests.swift in Sources */,
 				5F92FF532E63FE5100A917E5 /* GetMovieDetailUseCaseTests.swift in Sources */,
 				5F92FF5D2E646EFA00A917E5 /* NetworkServiceTests.swift in Sources */,
+				5FCFC8442E657B1400FB41D1 /* MoviesListViewModelTests.swift in Sources */,
 				5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */,
 				5F92FF672E64EAB900A917E5 /* URLProtocolStub.swift in Sources */,
 			);

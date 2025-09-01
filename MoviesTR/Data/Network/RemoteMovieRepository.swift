@@ -29,6 +29,26 @@ final class RemoteMovieRepository: MovieRepository {
         let year: Int
     }
     
+    private struct RemoteMovieDetail: Identifiable, Decodable {
+        let id: Int
+        let name: String
+        let Description: String
+        let Notes: String
+        let Rating: Double
+        let picture: String
+        let releaseDate: TimeInterval
+        
+        var movieDetail: MovieDetail {
+            return MovieDetail(id: id,
+                               name: name,
+                               description: Description,
+                               notes: Notes,
+                               rating: "\(Rating)",
+                               imageURL: URL(string: picture)!,
+                               releaseDate: Date(timeIntervalSince1970: releaseDate))
+        }
+    }
+    
     // MARK: - MoviesFetching
     func fetchMovies(type: MoviesType) async throws -> [Movie] {
         let url: URL
@@ -49,7 +69,8 @@ final class RemoteMovieRepository: MovieRepository {
             throw URLError(.badURL)
         }
         
-        _ = try await networkService.fetchData(from: url)
-        return MovieDetail(id: -1, name: "", description: "", notes: "", rating: "", imageURL: URL(string: "http://anyurl.com")!, releaseDate: Date())
+        let data = try await networkService.fetchData(from: url)
+        let movieDetail = (try JSONDecoder().decode(RemoteMovieDetail.self, from: data)).movieDetail
+        return movieDetail
     }
 }

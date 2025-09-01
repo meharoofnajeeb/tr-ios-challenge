@@ -107,17 +107,7 @@ final class RemoteMovieRepositoryTests: XCTestCase {
     
     func test_fetchMovieDetails_constructsURLCorrectly() async throws {
         let movieID = 1
-        let json = """
-{
-    "id": \(movieID),
-      "name": "Movie \(movieID)",
-      "Description": "Some random description for Movie \(movieID)",
-      "Notes": "Some random notes for Movie \(movieID)",
-      "Rating": 10,
-      "picture": "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/\(movieID).jpg",
-      "releaseDate": 946684800
-}
-""".data(using: .utf8)!
+        let json = makeMovieDetailsJson(movieID: movieID)
         let sut = makeSUT()
         
         URLProtocolStub.requestHandler = { [weak self] request in
@@ -134,6 +124,29 @@ final class RemoteMovieRepositoryTests: XCTestCase {
         }
         
         _ = try await sut.fetchMovieDetails(for: movieID)
+    }
+    
+    func test_fetchMovieDetails_decodesMovieDetailsOnFetcherSuccess() async throws {
+        let movieID = 1
+        let json = makeMovieDetailsJson(movieID: movieID)
+        let sut = makeSUT()
+        
+        URLProtocolStub.requestHandler = { request in
+            guard let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil) else {
+                throw URLError(.badURL)
+            }
+            return (json, response)
+        }
+        
+        let movieDetail = try await sut.fetchMovieDetails(for: movieID)
+        
+        XCTAssertEqual(movieDetail.id, movieID)
+        XCTAssertEqual(movieDetail.name, "Movie \(movieID)")
+        XCTAssertEqual(movieDetail.description, "Some random description for Movie \(movieID)")
+        XCTAssertEqual(movieDetail.notes, "Some random notes for Movie \(movieID)")
+        XCTAssertEqual(movieDetail.rating, "10.0")
+        XCTAssertEqual(movieDetail.imageURL.absoluteString, "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/\(movieID).jpg")
+        XCTAssertEqual(movieDetail.releaseDate.timeIntervalSince1970, 946684800)
     }
     
     //MARK: - Private helpers
@@ -160,6 +173,20 @@ final class RemoteMovieRepositoryTests: XCTestCase {
             "year": \(year)
         }
     ]
+}
+""".data(using: .utf8)!
+    }
+    
+    private func makeMovieDetailsJson(movieID: Int) -> Data {
+        return """
+{
+    "id": \(movieID),
+    "name": "Movie \(movieID)",
+    "Description": "Some random description for Movie \(movieID)",
+    "Notes": "Some random notes for Movie \(movieID)",
+    "Rating": 10,
+    "picture": "https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/\(movieID).jpg",
+    "releaseDate": 946684800
 }
 """.data(using: .utf8)!
     }

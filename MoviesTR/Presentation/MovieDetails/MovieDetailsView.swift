@@ -28,6 +28,14 @@ struct MovieDetailsView: View {
             }
         }
         .navigationTitle(viewModel.title)
+        .toolbar {
+            Button {
+                viewModel.likeTapped()
+            } label: {
+                Image(systemName: viewModel.isLiked ? "heart.fill" : "heart")
+                    .foregroundStyle(viewModel.isLiked ? .red : .black)
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadContent()

@@ -10,11 +10,14 @@ import Combine
 
 @MainActor
 final class MovieDetailViewModel: ObservableObject {
+    private let movieID: Int
     private let getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol
     private let getMoviesUseCase: GetMoviesUseCaseProtocol
-    private let movieID: Int
+    private let getLikeStatusUseCase: GetLikesStatusUseCaseProtocol
+    private let toggleLikesUseCase: ToggleLikesUseCaseProtocol
     
     @Published var movieDetails: MovieDetail?
+    @Published var isLiked = false
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var recommendedMovies = [Movie]()
@@ -44,18 +47,25 @@ final class MovieDetailViewModel: ObservableObject {
         movieDetails?.imageURL
     }
     
-    init(getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol, getMoviesUseCase: GetMoviesUseCaseProtocol, movieID: Int) {
+    init(movieID: Int, getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol, getMoviesUseCase: GetMoviesUseCaseProtocol, getLikeStatusUseCase: GetLikesStatusUseCaseProtocol, toggleLikeUseCase: ToggleLikesUseCaseProtocol) {
+        self.movieID = movieID
         self.getMovieDetailsUseCase = getMovieDetailsUseCase
         self.getMoviesUseCase = getMoviesUseCase
-        self.movieID = movieID
+        self.getLikeStatusUseCase = getLikeStatusUseCase
+        self.toggleLikesUseCase = toggleLikeUseCase
     }
     
     func loadContent() async {
         await fetchMovieDetails()
+        refreshLikeStatus()
         
         guard movieDetails != nil else { return }
         
         await fetchRecommendedMovies()
+    }
+    
+    func likeTapped() {
+        toggleLike()
     }
     
     private func fetchMovieDetails() async {
@@ -75,6 +85,15 @@ final class MovieDetailViewModel: ObservableObject {
         } catch {
             recommendedMovies = []
         }
+    }
+    
+    private func refreshLikeStatus() {
+        isLiked = getLikeStatusUseCase.isLiked(movieID)
+    }
+    
+    private func toggleLike() {
+        toggleLikesUseCase.toggleLike(for: movieID)
+        isLiked.toggle()
     }
 }
 

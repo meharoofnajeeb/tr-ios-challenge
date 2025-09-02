@@ -13,7 +13,7 @@ final class MovieDetailsViewModelTests: XCTestCase {
     func test_loadContent_fetchesMovieDetailsAndUpdatesViewModelStates() async {
         let movieID = 1
         let movieDetails = getAnyMovieDetail(with: movieID)
-        let (sut, getMovieDetailsUseCase, _) = makeSUT(withDetailsResult: .success(movieDetails), withRecommendedResult: .failure(anyNSError()), movieID: movieID)
+        let (sut, getMovieDetailsUseCase, _, _) = makeSUT(movieID: movieID, withDetailsResult: .success(movieDetails), withRecommendedResult: .failure(anyNSError()))
         
         await sut.loadContent()
         
@@ -24,7 +24,7 @@ final class MovieDetailsViewModelTests: XCTestCase {
     }
     
     func test_loadContent_setsErrorOnFailure() async {
-        let (sut, getMovieDetailsUseCase, _) = makeSUT(withDetailsResult: .failure(anyNSError()), withRecommendedResult: .failure(anyNSError()), movieID: -1)
+        let (sut, getMovieDetailsUseCase, _, _) = makeSUT(movieID: -1, withDetailsResult: .failure(anyNSError()), withRecommendedResult: .failure(anyNSError()))
         
         await sut.loadContent()
         
@@ -37,7 +37,7 @@ final class MovieDetailsViewModelTests: XCTestCase {
     func test_loadContent_deliversRecommendedMoviesAfterFetchingMovieDetails() async {
         let currentMovieID = 1
         let expectedMovies = [Movie(id: 2, name: "Movie 2", imageURL: URL(string: "https://some-url-2.com")!, year: "2000")]
-        let (sut, getMovieDetailsUseCase, getMoviesUseCase) = makeSUT(withDetailsResult: .success(getAnyMovieDetail(with: currentMovieID)), withRecommendedResult: .success(expectedMovies), movieID: currentMovieID)
+        let (sut, getMovieDetailsUseCase, getMoviesUseCase, _) = makeSUT(movieID: currentMovieID, withDetailsResult: .success(getAnyMovieDetail(with: currentMovieID)), withRecommendedResult: .success(expectedMovies))
         
         await sut.loadContent()
         
@@ -51,7 +51,7 @@ final class MovieDetailsViewModelTests: XCTestCase {
     func test_loadContent_doesNotFetchRecommendedMoviesWhenFetchingMovieDetailsFail() async {
         let currentMovieID = 1
         let expectedMovies = [Movie(id: 2, name: "Movie 2", imageURL: URL(string: "https://some-url-2.com")!, year: "2000")]
-        let (sut, _, getMoviesUseCase) = makeSUT(withDetailsResult: .failure(anyNSError()), withRecommendedResult: .success(expectedMovies), movieID: currentMovieID)
+        let (sut, _, getMoviesUseCase, _) = makeSUT(movieID: currentMovieID, withDetailsResult: .failure(anyNSError()), withRecommendedResult: .success(expectedMovies))
         
         await sut.loadContent()
         
@@ -61,12 +61,40 @@ final class MovieDetailsViewModelTests: XCTestCase {
         XCTAssertFalse(sut.isLoading)
     }
     
+    func test_loadContent_updatesLikeStatusState() async {
+        let likedMovies: Set<Int> = [1, 3, 5]
+        let movieID = 1
+        let (sut, _, _, likesUseCaseMock) = makeSUT(movieID: movieID, withDetailsResult: .success(getAnyMovieDetail(with: movieID)), withRecommendedResult: .failure(anyNSError()), likedMovies: likedMovies)
+        
+        await sut.loadContent()
+        
+        XCTAssertTrue(sut.isLiked)
+        XCTAssertEqual(likesUseCaseMock.isLikedCallCount, 1)
+    }
+    
+    func test_likeTapped_updatesLikeStatusState() {
+        let movieID = 1
+        let (sut, _, _, likesUseCaseMock) = makeSUT(movieID: movieID, withDetailsResult: .success(getAnyMovieDetail(with: movieID)), withRecommendedResult: .failure(anyNSError()))
+        XCTAssertFalse(sut.isLiked)
+        
+        sut.likeTapped()
+        
+        XCTAssertTrue(sut.isLiked)
+        XCTAssertEqual(likesUseCaseMock.toggleLikeCallCount, 1)
+        
+        sut.likeTapped()
+        
+        XCTAssertFalse(sut.isLiked)
+        XCTAssertEqual(likesUseCaseMock.toggleLikeCallCount, 2)
+    }
+    
     //MARK: - Private helpers
-    private func makeSUT(withDetailsResult: Result<MovieDetail, Error>, withRecommendedResult: Result<[Movie], Error>, movieID: Int) -> (sut: MovieDetailViewModel, getMovieDetailUseCase: GetMovieDetailsUseCaseMock, getMoviesUseCase: GetMoviesUseCaseMock) {
+    private func makeSUT(movieID: Int, withDetailsResult: Result<MovieDetail, Error>, withRecommendedResult: Result<[Movie], Error>, likedMovies: Set<Int> = []) -> (sut: MovieDetailViewModel, getMovieDetailUseCase: GetMovieDetailsUseCaseMock, getMoviesUseCase: GetMoviesUseCaseMock, likeStatusUseCase: LikesUseCaseMock) {
         let getMovieDetailsUseCase = GetMovieDetailsUseCaseMock(result: withDetailsResult)
         let getMoviesUseCase = GetMoviesUseCaseMock(result: withRecommendedResult)
-        let sut = MovieDetailViewModel(getMovieDetailsUseCase: getMovieDetailsUseCase, getMoviesUseCase: getMoviesUseCase, movieID: movieID)
-        return (sut, getMovieDetailsUseCase, getMoviesUseCase)
+        let likesUseCaseMock = LikesUseCaseMock(likedMovies: likedMovies)
+        let sut = MovieDetailViewModel(movieID: movieID, getMovieDetailsUseCase: getMovieDetailsUseCase, getMoviesUseCase: getMoviesUseCase, getLikeStatusUseCase: likesUseCaseMock, toggleLikeUseCase: likesUseCaseMock)
+        return (sut, getMovieDetailsUseCase, getMoviesUseCase, likesUseCaseMock)
     }
     
     private func getAnyMovieDetail(with id: Int) -> MovieDetail {
@@ -94,6 +122,30 @@ final class MovieDetailsViewModelTests: XCTestCase {
         func getMovieDetails(for id: Int) async throws -> MovieDetail {
             getMovieDetailsCallCount += 1
             return try result.get()
+        }
+    }
+    
+    private class LikesUseCaseMock: GetLikesStatusUseCaseProtocol, ToggleLikesUseCaseProtocol {
+        private var likedMovies: Set<Int>
+        var toggleLikeCallCount = 0
+        var isLikedCallCount = 0
+        
+        init(likedMovies: Set<Int>) {
+            self.likedMovies = likedMovies
+        }
+        
+        func isLiked(_ moviedID: Int) -> Bool {
+            isLikedCallCount += 1
+            return likedMovies.contains(moviedID)
+        }
+        
+        func toggleLike(for movieID: Int) {
+            toggleLikeCallCount += 1
+            if likedMovies.contains(movieID) {
+                likedMovies.remove(movieID)
+            } else {
+                likedMovies.insert(movieID)
+            }
         }
     }
 }

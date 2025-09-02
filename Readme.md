@@ -1,36 +1,58 @@
-# The challenge
-## Goal
-Build a simple movie browser app using **Swift 5+** and **SwiftUI**.  
-Load a list of movies, navigate to a details screen, show recommended movies, and support “likes”.
-Functionality and code quality matter more than pixel perfection.
+# Movie Browser iOS App
 
-## Requirements
-- **Language & UI:** Swift 5+, SwiftUI.
-- **Concurrency:** Use Swift Concurrency (`async/await`).
-- **Package Management:** Swift Package Manager.
-- **Architecture:** MVVM or a similarly clean pattern.
-- **Networking:** Handle loading, error, and empty states gracefully.
-- **Environment:** In your README, specify the **Xcode version**, **iOS version**, and **device/simulator model** you used for testing.
-- **Repo:** Fork this repo and keep your fork public until review.
+A simple iOS application built with SwiftUI that fetches movies from a public API, allows users to view details and recommendations, and save their "liked" movies. This project was developed following Clean Architecture principles and a Test-Driven Development (TDD) methodology.
 
-## API
-- **List:**  
-  `https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/list.json`  
+## Table of Contents
+1.  Features
+2.  Architecture
+3.  How to Run
+4.  Technical Specifications
 
-- **Details:**  
-  `https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/{id}.json`  
+## 1. Features
+This application was developed with a focus on robust functionality and a clean, test-driven architecture.
 
-- **Recommended:**  
-  `https://raw.githubusercontent.com/TradeRev/tr-ios-challenge/master/details/recommended/{id}.json`  
+* **Browse Movies:** Fetches and displays a list of currently playing movies from a remote API.
+* **View Details:** Shows a detailed view for each movie, including a description, rating, and release date.
+* **See Recommendations:** Displays a list of recommended movies on the detail screen.
+* **"Like" System:** Allows users to "like" movies. This preference is persisted locally and the liked status is reflected consistently across all views.
+* **Local Persistence:** Liked movie preferences are saved locally using `UserDefaults`, making them available across app launches.
+* **Efficient Image Loading:** Images are loaded asynchronously and cached for a smooth scrolling experience and reduced network usage, powered by `SDWebImageSwiftUI`.
 
-## What to Build
-- **Movie List:** fetch and display the list.
-- **Details Screen:** show details for a movie and its recommendations.
-- **Navigation:** tapping a recommended movie opens its details.
-- **Likes:** allow marking a movie as liked/favorited and reflect this state across list and details (persist locally; your choice of method).
+## 2. Architecture
+The application is built using **Clean Architecture** to create a decoupled, testable, and maintainable codebase.
 
-## Bonus
-- Unit tests.
-- Lightweight caching (e.g., images or responses).
-- Dark Mode support.
-- Brief README notes on trade-offs and “what you’d do next”.
+![Architecture Diagram](architecture_diagram.png)
+
+### 1. Domain Layer (Core)
+The core of the application, containing business logic, independent of any UI or data components.
+
+* **Entities:** `Movie`, `MovieDetails`.
+* **Use Cases:** Individual, testable business logic units like `GetMoviesUseCase`, `GetMovieDetailsUseCase`, `ToggleLikeUseCase`, and `GetLikeStatusUseCase`.
+* **Repository Protocols:** Abstract contracts (`MoviesFetching`, `MovieDetailsFetching`, `LikesRepository`) defining data interactions.
+
+### 2. Data Layer (Implementation)
+Responsible for all data operations, implementing the contracts defined in the Domain layer.
+
+* **Repositories:** `RemoteMovieRepository` and `UserDefaultsLikesRepository`.
+* **Network Client:** A generic `NetworkService` for handling `URLSession` requests.
+
+### 3. Presentation Layer (UI)
+Responsible for the user interface and user interaction, built with **SwiftUI** following the **MVVM** pattern.
+
+* **Views:** `MovieListView`, `MovieDetailView`.
+* **ViewModels:** `MovieListViewModel`, `MovieDetailViewModel` hold UI state and communicate with Use Cases.
+
+## 3. How to Run
+1.  Clone the repository.
+2.  Open the `.xcodeproj` file in Xcode.
+3.  Select a target simulator or a physical device.
+4.  Press `Cmd+R` to build and run the application.
+
+### Testing Environment
+* **Xcode Version used:** `16.3`
+* **Minimum Deployment Version:** `iOS 17.0`
+
+## 4. Technical Specifications
+* **Language:** Swift 5+
+* **UI Framework:** SwiftUI
+* **Dependency Management:** Swift Package Manager

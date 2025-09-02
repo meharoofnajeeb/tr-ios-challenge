@@ -7,6 +7,7 @@ A simple iOS application built with SwiftUI that fetches movies from a public AP
 2.  Architecture
 3.  How to Run
 4.  Technical Specifications
+5.  Trade-offs and Future Improvements
 
 ## 1. Features
 This application was developed with a focus on robust functionality and a clean, test-driven architecture.
@@ -56,3 +57,15 @@ Responsible for the user interface and user interaction, built with **SwiftUI** 
 * **Language:** Swift 5+
 * **UI Framework:** SwiftUI
 * **Dependency Management:** Swift Package Manager
+
+## 5. Trade-offs and Future Improvements
+
+### Trade-offs
+* **Architecture:** A full **Clean Architecture** was implemented to maximize testability and separation of concerns. For an application of this scale, a simpler MVVM pattern could have been sufficient, but this approach was chosen as this was a take home test to demonstrate better approaches.
+* **Persistence:** **`UserDefaults`** was chosen for persisting "likes" due to its simplicity and suitability for storing a simple set of IDs. For a larger application with more complex local data, a more powerful solution like **`Core Data`** would be more appropriate.
+
+### Future Improvements
+* **Response Caching:** Implement a lightweight response cache using `URLCache` to reduce network requests for data that has been recently viewed, improving performance and reducing data usage.
+* **Pagination:** Implement infinite scrolling or pagination on the main movie list to handle a much larger dataset gracefully.
+* **Enhanced UI/UX:** Introduce custom view transitions and micro-animations to create a more polished and engaging user experience.
+* **Search Functionality:** Add a search bar to the movie list, allowing users to quickly find movies by title.

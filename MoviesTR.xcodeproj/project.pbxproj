@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F2AD7B72E66A852001297F5 /* LikesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7B62E66A84E001297F5 /* LikesRepository.swift */; };
 		5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */; };
 		5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */; };
 		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		5F265FFF2E62719F00D7861F /* MoviesTR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesTR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F2AD7B62E66A84E001297F5 /* LikesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesRepository.swift; sourceTree = "<group>"; };
 		5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRApp.swift; sourceTree = "<group>"; };
 		5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		5F92FF142E62E43C00A917E5 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				5F2AD7B62E66A84E001297F5 /* LikesRepository.swift */,
 				5F92FF3D2E63E52300A917E5 /* MovieRepository.swift */,
 			);
 			path = Repositories;
@@ -463,6 +466,7 @@
 				5FCFC8462E658AAD00FB41D1 /* MoviesListViewModel.swift in Sources */,
 				5FCFC8582E65FF8E00FB41D1 /* MovieDetailsViewModel.swift in Sources */,
 				5F92FF4B2E63FCF100A917E5 /* MovieDetail.swift in Sources */,
+				5F2AD7B72E66A852001297F5 /* LikesRepository.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */,
 				5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */,
 				5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */,

@@ -19,14 +19,13 @@ struct MoviesTRApp: App {
         let networkService = NetworkService()
         let remoteRepository = RemoteMovieRepository(networkService: networkService)
         getMoviesUseCase = GetMoviesUseCase(fetcher: remoteRepository)
-        
-        moviesListViewModel = MoviesListViewModel(getMoviesUseCase: getMoviesUseCase)
-        
         getMovieDetailUseCase = GetMovieDetailUseCase(fetcher: remoteRepository)
         
         let likesRepository = UserDefaultsLikesRepository()
         getLikeStatusUseCase = GetLikeStatusUseCase(likesRepository: likesRepository)
         toggleLikeUseCase = ToggleLikeUseCase(likesRepository: likesRepository)
+        
+        moviesListViewModel = MoviesListViewModel(getMoviesUseCase: getMoviesUseCase, getLikeStatusUseCase: getLikeStatusUseCase, toggleLikeUseCase: toggleLikeUseCase)
     }
     
     var body: some Scene {

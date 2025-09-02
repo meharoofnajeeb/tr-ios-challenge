@@ -14,6 +14,7 @@
 		5F2AD7BF2E66B33F001297F5 /* GetLikeStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7BE2E66B33A001297F5 /* GetLikeStatusUseCase.swift */; };
 		5F2AD7C22E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7C12E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift */; };
 		5F2AD7C42E66B64D001297F5 /* UserDefaultsLikesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7C32E66B641001297F5 /* UserDefaultsLikesRepository.swift */; };
+		5F2AD7C92E67479D001297F5 /* LikesUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7C82E674797001297F5 /* LikesUseCaseMock.swift */; };
 		5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */; };
 		5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */; };
 		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		5F2AD7BE2E66B33A001297F5 /* GetLikeStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLikeStatusUseCase.swift; sourceTree = "<group>"; };
 		5F2AD7C12E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLikesRepositoryTests.swift; sourceTree = "<group>"; };
 		5F2AD7C32E66B641001297F5 /* UserDefaultsLikesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLikesRepository.swift; sourceTree = "<group>"; };
+		5F2AD7C82E674797001297F5 /* LikesUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesUseCaseMock.swift; sourceTree = "<group>"; };
 		5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRApp.swift; sourceTree = "<group>"; };
 		5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		5FCFC8592E66114800FB41D1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5F2AD7C82E674797001297F5 /* LikesUseCaseMock.swift */,
 				5FCFC85A2E66114F00FB41D1 /* GetMoviesUseCaseMock.swift */,
 			);
 			path = Helpers;
@@ -514,6 +517,7 @@
 				5F2AD7BD2E66ACF5001297F5 /* GetLikeStatusUseCaseTests.swift in Sources */,
 				5F92FF452E63E65800A917E5 /* GetMoviesUseCaseTests.swift in Sources */,
 				5FCFC8552E65988800FB41D1 /* MovieDetailsViewModelTests.swift in Sources */,
+				5F2AD7C92E67479D001297F5 /* LikesUseCaseMock.swift in Sources */,
 				5F2AD7C22E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift in Sources */,
 				5F92FF672E64EAB900A917E5 /* URLProtocolStub.swift in Sources */,
 				5F2AD7B92E66A923001297F5 /* ToggleLikeUseCaseTests.swift in Sources */,

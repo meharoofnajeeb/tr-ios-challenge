@@ -10,6 +10,8 @@ import SDWebImageSwiftUI
 
 struct MovieListRow: View {
     let movie: Movie
+    let isLiked: Bool
+    let onLikeTapped: (Int) -> Void
     
     var body: some View {
         HStack {
@@ -31,6 +33,7 @@ struct MovieListRow: View {
                 }
                 .frame(width: 100, height: 100)
             }
+            
             VStack(alignment: .leading) {
                 Text(movie.name)
                     .fontWeight(.semibold)
@@ -39,10 +42,19 @@ struct MovieListRow: View {
                     .font(.system(size: 14))
             }
             
+            Spacer()
+            
+            Button {
+                onLikeTapped(movie.id)
+            } label: {
+                Image(systemName: isLiked ? "heart.fill" : "heart")
+                    .foregroundStyle(isLiked ? .red : .black)
+            }
+            .buttonStyle(.plain)
         }
     }
 }
 
 #Preview {
-    MovieListRow(movie: Movie(id: 1, name: "Movie 1", imageURL: URL(string: "http://any-url.com")!, year: "2000"))
+    MovieListRow(movie: Movie(id: 1, name: "Movie 1", imageURL: URL(string: "http://any-url.com")!, year: "2000"), isLiked: false, onLikeTapped: { _ in })
 }

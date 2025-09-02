@@ -25,7 +25,7 @@ struct MoviesListView: View {
                 } else {
                     List(viewModel.movies) { movie in
                         NavigationLink(destination: destinationProvider(movie.id)) {
-                            MovieListRow(movie: movie)
+                            MovieListRow(movie: movie, isLiked: viewModel.isLiked(movieID: movie.id), onLikeTapped: viewModel.toggleLiked)
                         }
                     }
                 }

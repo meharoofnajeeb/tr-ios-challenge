@@ -25,6 +25,9 @@ final class MovieDetailViewModel {
     
     func loadContent() async {
         await fetchMovieDetails()
+        
+        guard movieDetails != nil else { return }
+        
         await fetchRecommendedMovies()
     }
     

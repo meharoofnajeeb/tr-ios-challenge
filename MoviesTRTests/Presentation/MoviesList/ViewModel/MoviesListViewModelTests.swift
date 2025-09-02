@@ -40,18 +40,4 @@ final class MoviesListViewModelTests: XCTestCase {
         let sut = MoviesListViewModel(getMoviesUseCase: getMoviesUseCase)
         return (sut, getMoviesUseCase)
     }
-    
-    private class GetMoviesUseCaseMock: GetMoviesUseCaseProtocol {
-        private(set) var getMoviesCallCount = 0
-        var result: Result<[Movie], Error>
-        
-        init(result: Result<[Movie], Error>) {
-            self.result = result
-        }
-        
-        func getMovies(type: MoviesType) async throws -> [Movie] {
-            getMoviesCallCount += 1
-            return try result.get()
-        }
-    }
 }

@@ -9,12 +9,12 @@ import XCTest
 @testable import MoviesTR
 
 final class MovieDetailsViewModelTests: XCTestCase {
-    func test_fetchMovieDetails_fetchesMovieDetailsAndUpdatesViewModelStates() async {
+    func test_loadContent_fetchesMovieDetailsAndUpdatesViewModelStates() async {
         let movieID = 1
         let movieDetails = getAnyMovieDetail(with: movieID)
-        let (sut, getMovieDetailsUseCase) = makeSUT(withResult: .success(movieDetails), movieID: movieID)
+        let (sut, getMovieDetailsUseCase, _) = makeSUT(withDetailsResult: .success(movieDetails), withRecommendedResult: .failure(anyNSError()), movieID: movieID)
         
-        await sut.fetchMovieDetails()
+        await sut.loadContent()
         
         XCTAssertEqual(getMovieDetailsUseCase.getMovieDetailsCallCount, 1)
         XCTAssertFalse(sut.isLoading)
@@ -22,22 +22,35 @@ final class MovieDetailsViewModelTests: XCTestCase {
         XCTAssertNil(sut.errorMessage)
     }
     
-    func test_fetchMovieDetails_setsErrorOnFailure() async {
+    func test_loadContent_setsErrorOnFailure() async {
         let expectedError = NSError(domain: "Test", code: -1)
-        let (sut, _) = makeSUT(withResult: .failure(expectedError), movieID: -1)
+        let (sut, _, _) = makeSUT(withDetailsResult: .failure(expectedError), withRecommendedResult: .failure(anyNSError()), movieID: -1)
         
-        await sut.fetchMovieDetails()
+        await sut.loadContent()
         
         XCTAssertFalse(sut.isLoading)
         XCTAssertNil(sut.movieDetails)
         XCTAssertNotNil(sut.errorMessage)
     }
     
+    func test_loadContent_deliversRecommendedMoviesAfterFetchingMovieDetails() async {
+        let currentMovieID = 1
+        let expectedMovies = [Movie(id: 2, name: "Movie 2", imageURL: URL(string: "https://some-url-2.com")!, year: "2000")]
+        let (sut, _, _) = makeSUT(withDetailsResult: .success(getAnyMovieDetail(with: currentMovieID)), withRecommendedResult: .success(expectedMovies), movieID: currentMovieID)
+        
+        await sut.loadContent()
+        
+        XCTAssertEqual(sut.recommendedMovies, expectedMovies)
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertFalse(sut.isLoading)
+    }
+    
     //MARK: - Private helpers
-    private func makeSUT(withResult result: Result<MovieDetail, Error>, movieID: Int) -> (sut: MovieDetailViewModel, getMovieDetailUseCase: GetMovieDetailsUseCaseMock) {
-        let getMovieDetailsUseCase = GetMovieDetailsUseCaseMock(result: result)
-        let sut = MovieDetailViewModel(getMovieDetailsUseCase: getMovieDetailsUseCase, movieID: movieID)
-        return (sut, getMovieDetailsUseCase)
+    private func makeSUT(withDetailsResult: Result<MovieDetail, Error>, withRecommendedResult: Result<[Movie], Error>, movieID: Int) -> (sut: MovieDetailViewModel, getMovieDetailUseCase: GetMovieDetailsUseCaseMock, getMoviesUseCase: GetMoviesUseCaseMock) {
+        let getMovieDetailsUseCase = GetMovieDetailsUseCaseMock(result: withDetailsResult)
+        let getMoviesUseCase = GetMoviesUseCaseMock(result: withRecommendedResult)
+        let sut = MovieDetailViewModel(getMovieDetailsUseCase: getMovieDetailsUseCase, getMoviesUseCase: getMoviesUseCase, movieID: movieID)
+        return (sut, getMovieDetailsUseCase, getMoviesUseCase)
     }
     
     private func getAnyMovieDetail(with id: Int) -> MovieDetail {
@@ -48,6 +61,10 @@ final class MovieDetailsViewModelTests: XCTestCase {
                            rating: "10.0",
                            imageURL: URL(string: "http://some-url.com")!,
                            releaseDate: Date())
+    }
+    
+    private func anyNSError() -> NSError {
+        return NSError(domain: "Test", code: 1)
     }
     
     private class GetMovieDetailsUseCaseMock: GetMovieDetailsUseCaseProtocol {

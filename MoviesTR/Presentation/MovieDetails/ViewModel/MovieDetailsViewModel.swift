@@ -9,18 +9,26 @@ import Combine
 
 final class MovieDetailViewModel {
     private let getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol
+    private let getMoviesUseCase: GetMoviesUseCaseProtocol
     private let movieID: Int
     
     @Published var movieDetails: MovieDetail?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var recommendedMovies = [Movie]()
     
-    init(getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol, movieID: Int) {
+    init(getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol, getMoviesUseCase: GetMoviesUseCaseProtocol, movieID: Int) {
         self.getMovieDetailsUseCase = getMovieDetailsUseCase
+        self.getMoviesUseCase = getMoviesUseCase
         self.movieID = movieID
     }
     
-    func fetchMovieDetails() async {
+    func loadContent() async {
+        await fetchMovieDetails()
+        await fetchRecommendedMovies()
+    }
+    
+    private func fetchMovieDetails() async {
         isLoading = true
         errorMessage = nil
         do {
@@ -29,5 +37,13 @@ final class MovieDetailViewModel {
             errorMessage = "Some error occured - \(error.localizedDescription). Please try again."
         }
         isLoading = false
+    }
+    
+    private func fetchRecommendedMovies() async {
+        do {
+            recommendedMovies = try await getMoviesUseCase.getMovies(type: .recommended(movieID))
+        } catch {
+            recommendedMovies = []
+        }
     }
 }

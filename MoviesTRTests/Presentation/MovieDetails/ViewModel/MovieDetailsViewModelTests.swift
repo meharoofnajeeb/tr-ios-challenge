@@ -23,8 +23,7 @@ final class MovieDetailsViewModelTests: XCTestCase {
     }
     
     func test_loadContent_setsErrorOnFailure() async {
-        let expectedError = NSError(domain: "Test", code: -1)
-        let (sut, _, _) = makeSUT(withDetailsResult: .failure(expectedError), withRecommendedResult: .failure(anyNSError()), movieID: -1)
+        let (sut, _, _) = makeSUT(withDetailsResult: .failure(anyNSError()), withRecommendedResult: .failure(anyNSError()), movieID: -1)
         
         await sut.loadContent()
         

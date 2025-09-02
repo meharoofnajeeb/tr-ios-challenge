@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserDefaultsLikesRepository: LikesRepository {
+final class UserDefaultsLikesRepository: LikesRepository {
     private let userDefaults: UserDefaults
     private let key = "likedMovieIDs"
 

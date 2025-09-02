@@ -5,6 +5,7 @@
 //  Created by Meharoof Najeeb on 2025-09-01.
 //
 
+import Foundation
 import Combine
 
 @MainActor
@@ -17,6 +18,31 @@ final class MovieDetailViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var recommendedMovies = [Movie]()
+    
+    var title: String {
+        return movieDetails?.name ?? "Loading..."
+    }
+    
+    var rating: String {
+        return movieDetails?.rating ?? "N/A"
+    }
+    
+    var releaseDate: String {
+        guard let releaseDate = movieDetails?.releaseDate else { return "N/A" }
+        return DateFormatter.movieReleaseDate.string(from: releaseDate)
+    }
+    
+    var description: String {
+        return movieDetails?.description ?? ""
+    }
+    
+    var notes: String {
+        return movieDetails?.notes ?? ""
+    }
+    
+    var imageURL: URL? {
+        movieDetails?.imageURL
+    }
     
     init(getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol, getMoviesUseCase: GetMoviesUseCaseProtocol, movieID: Int) {
         self.getMovieDetailsUseCase = getMovieDetailsUseCase
@@ -50,4 +76,13 @@ final class MovieDetailViewModel: ObservableObject {
             recommendedMovies = []
         }
     }
+}
+
+private extension DateFormatter {
+    static let movieReleaseDate: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
 }

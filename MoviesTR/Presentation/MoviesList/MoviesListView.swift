@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MoviesListView: View {
     @StateObject var viewModel: MoviesListViewModel
-        
+    
+    var destinationProvider: (Int) -> MovieDetailsView
+    
     var body: some View {
         NavigationView {
             Group {
@@ -22,7 +24,7 @@ struct MoviesListView: View {
                         .padding()
                 } else {
                     List(viewModel.movies) { movie in
-                        NavigationLink(destination: MovieDetailsView()) {
+                        NavigationLink(destination: destinationProvider(movie.id)) {
                             MovieListRow(movie: movie)
                         }
                     }

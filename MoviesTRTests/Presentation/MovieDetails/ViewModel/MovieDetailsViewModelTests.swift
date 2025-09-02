@@ -8,6 +8,7 @@
 import XCTest
 @testable import MoviesTR
 
+@MainActor
 final class MovieDetailsViewModelTests: XCTestCase {
     func test_loadContent_fetchesMovieDetailsAndUpdatesViewModelStates() async {
         let movieID = 1

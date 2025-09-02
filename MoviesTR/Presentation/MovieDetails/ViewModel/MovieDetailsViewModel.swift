@@ -7,7 +7,8 @@
 
 import Combine
 
-final class MovieDetailViewModel {
+@MainActor
+final class MovieDetailViewModel: ObservableObject {
     private let getMovieDetailsUseCase: GetMovieDetailsUseCaseProtocol
     private let getMoviesUseCase: GetMoviesUseCaseProtocol
     private let movieID: Int

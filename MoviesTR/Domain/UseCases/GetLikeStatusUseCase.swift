@@ -5,7 +5,11 @@
 //  Created by Meharoof Najeeb on 2025-09-02.
 //
 
-final class GetLikeStatusUseCase {
+protocol GetLikesStatusUseCaseProtocol {
+    func isLiked(_ moviedID: Int) -> Bool
+}
+
+final class GetLikeStatusUseCase: GetLikesStatusUseCaseProtocol {
     private let likesRepository: LikesRepository
     
     init(likesRepository: LikesRepository) {

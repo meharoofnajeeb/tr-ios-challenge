@@ -1,20 +1,18 @@
 //
-//  MovieListRow.swift
+//  RecommendedMovieView.swift
 //  MoviesTR
 //
-//  Created by Meharoof Najeeb on 2025-09-01.
+//  Created by Meharoof Najeeb on 2025-09-02.
 //
 
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct MovieListRow: View {
+struct RecommendedMovieView: View {
     let movie: Movie
-    let isLiked: Bool
-    let onLikeTapped: (Int) -> Void
     
     var body: some View {
-        HStack {
+        VStack(spacing: 4) {
             WebImage(url: movie.imageURL) { phase in
                 Group {
                     switch phase {
@@ -34,23 +32,10 @@ struct MovieListRow: View {
                 .frame(width: 100, height: 100)
             }
             
-            VStack(alignment: .leading) {
-                Text(movie.name)
-                    .fontWeight(.semibold)
-                Text("Released: \(movie.year)")
-                    .fontWeight(.light)
-                    .font(.system(size: 14))
-            }
-            
-            Spacer()
-            
-            Button {
-                onLikeTapped(movie.id)
-            } label: {
-                Image(systemName: isLiked ? "heart.fill" : "heart")
-                    .foregroundStyle(isLiked ? .red : .black)
-            }
-            .buttonStyle(.plain)
+            Text(movie.name)
+                .fontWeight(.regular)
+                .lineLimit(1)
         }
+        .frame(width: 100)
     }
 }

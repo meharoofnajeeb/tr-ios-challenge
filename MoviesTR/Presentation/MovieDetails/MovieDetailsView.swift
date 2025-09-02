@@ -66,6 +66,10 @@ struct MovieDetailsView: View {
                     
                     section(title: "Description", content: viewModel.description)
                     section(title: "Notes", content: viewModel.notes)
+                    
+                    Divider()
+                    
+                    RecommendedMoviesView(movies: viewModel.recommendedMovies)
                 }
             }
             .padding()

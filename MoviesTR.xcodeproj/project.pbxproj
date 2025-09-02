@@ -15,6 +15,8 @@
 		5F2AD7C22E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7C12E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift */; };
 		5F2AD7C42E66B64D001297F5 /* UserDefaultsLikesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7C32E66B641001297F5 /* UserDefaultsLikesRepository.swift */; };
 		5F2AD7C92E67479D001297F5 /* LikesUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7C82E674797001297F5 /* LikesUseCaseMock.swift */; };
+		5F2AD7CC2E676590001297F5 /* RecommendedMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7CB2E676590001297F5 /* RecommendedMovieView.swift */; };
+		5F2AD7CE2E6765D3001297F5 /* RecommendedMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2AD7CD2E6765D3001297F5 /* RecommendedMoviesView.swift */; };
 		5F92FF1E2E62E43C00A917E5 /* MoviesTRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */; };
 		5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */; };
 		5F92FF202E62E43C00A917E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		5F2AD7C12E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLikesRepositoryTests.swift; sourceTree = "<group>"; };
 		5F2AD7C32E66B641001297F5 /* UserDefaultsLikesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLikesRepository.swift; sourceTree = "<group>"; };
 		5F2AD7C82E674797001297F5 /* LikesUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesUseCaseMock.swift; sourceTree = "<group>"; };
+		5F2AD7CB2E676590001297F5 /* RecommendedMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedMovieView.swift; sourceTree = "<group>"; };
+		5F2AD7CD2E6765D3001297F5 /* RecommendedMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedMoviesView.swift; sourceTree = "<group>"; };
 		5F92FF112E62E43C00A917E5 /* MoviesTRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTRApp.swift; sourceTree = "<group>"; };
 		5F92FF1B2E62E43C00A917E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F92FF1C2E62E43C00A917E5 /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
@@ -130,6 +134,15 @@
 				5F2AD7C12E66B524001297F5 /* UserDefaultsLikesRepositoryTests.swift */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		5F2AD7CA2E676577001297F5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5F2AD7CB2E676590001297F5 /* RecommendedMovieView.swift */,
+				5F2AD7CD2E6765D3001297F5 /* RecommendedMoviesView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		5F92FF122E62E43C00A917E5 /* Application */ = {
@@ -337,6 +350,7 @@
 		5FCFC84D2E65960100FB41D1 /* MovieDetails */ = {
 			isa = PBXGroup;
 			children = (
+				5F2AD7CA2E676577001297F5 /* Components */,
 				5FCFC8562E65FF8500FB41D1 /* ViewModel */,
 				5FCFC84E2E65961600FB41D1 /* MovieDetailsView.swift */,
 			);
@@ -500,7 +514,9 @@
 				5F2AD7B72E66A852001297F5 /* LikesRepository.swift in Sources */,
 				5F92FF1F2E62E43C00A917E5 /* MoviesListView.swift in Sources */,
 				5F2AD7C42E66B64D001297F5 /* UserDefaultsLikesRepository.swift in Sources */,
+				5F2AD7CC2E676590001297F5 /* RecommendedMovieView.swift in Sources */,
 				5F92FF552E6437A300A917E5 /* GetMovieDetailsUseCase.swift in Sources */,
+				5F2AD7CE2E6765D3001297F5 /* RecommendedMoviesView.swift in Sources */,
 				5F92FF2B2E63D73300A917E5 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

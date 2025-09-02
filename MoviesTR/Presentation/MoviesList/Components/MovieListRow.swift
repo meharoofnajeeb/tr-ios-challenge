@@ -48,7 +48,7 @@ struct MovieListRow: View {
                 onLikeTapped(movie.id)
             } label: {
                 Image(systemName: isLiked ? "heart.fill" : "heart")
-                    .foregroundStyle(isLiked ? .red : .black)
+                    .foregroundStyle(isLiked ? .red : .primary)
             }
             .buttonStyle(.plain)
         }

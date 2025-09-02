@@ -33,7 +33,7 @@ struct MovieDetailsView: View {
                 viewModel.likeTapped()
             } label: {
                 Image(systemName: viewModel.isLiked ? "heart.fill" : "heart")
-                    .foregroundStyle(viewModel.isLiked ? .red : .black)
+                    .foregroundStyle(viewModel.isLiked ? .red : .primary)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
